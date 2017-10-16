@@ -10,8 +10,17 @@ import java.util.ArrayList;
  */
 public class MessageHandler {
 
-    public SendMessage getResponse(Message message) {
-        return null;
+    public SendMessage getResponse(Message msg) {
+        String messageText = "Lorem ipsum";
+        if (msg.getText().equals("/start")) {
+            messageText = "I'm Behter";
+        }
+
+
+
+        SendMessage message = new SendMessage();
+        message.setChatId(msg.getChatId()).setText(messageText);
+        return message;
     }
 
     public ArrayList<SendMessage> getDispatch() {

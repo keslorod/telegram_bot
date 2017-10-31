@@ -1,5 +1,6 @@
 package click.dozer;
 
+import org.telegram.telegrambots.api.methods.BotApiMethod;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * Created by alexd on 16.10.2017.
  */
 public class Bot extends TelegramLongPollingBot {
-    private MessageHandler messageHandler = new MessageHandler();
+    private MessageHandler messageHandler = new MessageHandler(this);
     private ArrayList<SendMessage> dispatch = new ArrayList<>();
 
     public Bot(){
@@ -21,7 +22,11 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            sendMsg(messageHandler.getResponse(update.getMessage()));
+            messageHandler.response(update.getMessage());
+        } else {
+            if (update.hasCallbackQuery()) {
+                System.out.println(update.getCallbackQuery().getData());
+            }
         }
     }
 
@@ -35,7 +40,7 @@ public class Bot extends TelegramLongPollingBot {
         return Config.BOT_TOKEN;
     }
 
-    public synchronized void sendMsg(SendMessage msg){
+    public synchronized <T extends BotApiMethod> void sendMsg(T msg) {
         try {
             execute(msg);
         } catch (TelegramApiException e) {

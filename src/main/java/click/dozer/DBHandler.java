@@ -5,6 +5,7 @@ import org.sqlite.JDBC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 /**
  * Created by alexd on 16.10.2017.
@@ -22,4 +23,14 @@ public class DBHandler {
         if (instance == null) instance = new DBHandler();
         return instance;
     }
+
+    private HashMap<Integer, User> getAllUsers() {
+        return null;
+    }
+
+    private HashMap<Integer, Event> getAllEvents() {
+        return null;
+    }
+
+
 }

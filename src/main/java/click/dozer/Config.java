@@ -41,11 +41,9 @@ class Config {
 
         BOT_NAME = botSetting.getProperty("BotName", "BehterevaMskBot");
         BOT_TOKEN = botSetting.getProperty("BotToken", "455563688:AAEolV7o_xq7Dg6kYPvXrpGVitRTKbxLuZA");
-        DB_URL = dbSetting.getProperty("dbURL", "jdbc:sqlite:./main/resources/db_ankil.db");
+        DB_URL = dbSetting.getProperty("dbURL", "jdbc:sqlite:./main/resources/bbeht.db");
         DB_USER = dbSetting.getProperty("dbUser", "dozer");
         DB_PSW = dbSetting.getProperty("dbPSW", "root");
     }
-
-
 
 }

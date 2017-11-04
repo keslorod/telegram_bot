@@ -1,0 +1,28 @@
+ кнопки yes-no
+ появляются после отправки /start, ждут нажатия, пропадают доставая обычную клаву, возвращают обычное сообщение с текстом кнопки.
+
+ if (msg.getText().equals("/start")) {
+            SendMessage message = new SendMessage();
+            messageText = "I'm Behter";
+            message.setChatId(msg.getChatId()).setText(messageText);
+            KeyboardButton yes = new KeyboardButton("Yes");
+            KeyboardButton no = new KeyboardButton("No");
+            KeyboardRow kr = new KeyboardRow();
+            kr.add(yes);
+            kr.add(no);
+            List<KeyboardRow> keyboardRows = new ArrayList<>();
+            keyboardRows.add(kr);
+            ReplyKeyboard rp = new ReplyKeyboardMarkup().setKeyboard(keyboardRows).setOneTimeKeyboard(true).setResizeKeyboard(true).setSelective(true);
+
+            message.setReplyMarkup(rp);
+
+            try {
+                bot.execute(message);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        -------------------
+

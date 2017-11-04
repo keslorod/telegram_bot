@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by alexd on 16.10.2017.
  */
 public class Bot extends TelegramLongPollingBot {
-    private MessageHandler messageHandler = new MessageHandler(this);
+    private MessageEditor messageEditor = new MessageEditor(this);
     private ArrayList<SendMessage> dispatch = new ArrayList<>();
 
     public Bot(){
@@ -22,7 +22,7 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            messageHandler.response(update.getMessage());
+            messageEditor.response(update.getMessage());
         } else {
             if (update.hasCallbackQuery()) {
                 System.out.println(update.getCallbackQuery().getData());
@@ -58,7 +58,7 @@ public class Bot extends TelegramLongPollingBot {
                     e.printStackTrace();
                 }
                 System.out.println("поток");
-//                dispatch = messageHandler.getDispatch();
+//                dispatch = messageEditor.getDispatch();
 //                for (SendMessage sm: dispatch) {
 //                    sendMsg(sm);
 //                }

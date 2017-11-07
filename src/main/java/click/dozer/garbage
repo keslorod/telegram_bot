@@ -26,3 +26,64 @@
 
         -------------------
 
+public void onUpdateReceived(Update update) {
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            Message msg = update.getMessage();
+//            messageEditor.response(update.getMessage());
+//            -------------------------
+            if (update.getMessage().getText().equals("/start")){
+                SendMessage sm = new SendMessage()
+                        .setChatId(msg.getChatId())
+                        .setText("<b>Hello!</b>")
+                        .enableHtml(true);
+                sendMsg(sm);
+            }
+            if (update.getMessage().getText().equals("/KB")){
+                SendMessage sm = new SendMessage()
+                        .setChatId(msg.getChatId())
+                        .setText("inline?");
+                KeyboardRow kr = new KeyboardRow();
+                kr.add(new KeyboardButton("Yes"));
+                kr.add(new KeyboardButton("No"));
+                List<KeyboardRow> krs = new ArrayList<>();
+                krs.add(kr);
+                ReplyKeyboard rp = new ReplyKeyboardMarkup().setKeyboard(krs);
+                sm.setReplyMarkup(rp);
+                sendMsg(sm);
+            }
+            if (update.getMessage().getText().equals("Yes")) {
+                SendMessage sm = new SendMessage()
+                        .setChatId(msg.getChatId())
+                        .setText("inline!");
+                List<InlineKeyboardButton> row = new ArrayList();
+                row.add(new InlineKeyboardButton().setText("ButtonText").setCallbackData("buttonPressed"));
+                List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+                keyboard.add(row);
+                InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup().setKeyboard(keyboard);
+                sm.setReplyMarkup(inlineKeyboardMarkup);
+                sendMsg(sm);
+
+            }
+//            -------------------------
+        } else {
+            if (update.hasCallbackQuery()) {
+                CallbackQuery cq = update.getCallbackQuery();
+                System.out.println(update.getCallbackQuery().getData());
+                EditMessageText emt = new EditMessageText()
+                        .setChatId(cq.getMessage().getChatId())
+                        .setMessageId(cq.getMessage().getMessageId())
+                        .setText("Edited text");
+                List<InlineKeyboardButton> row = new ArrayList();
+                row.add(new InlineKeyboardButton().setText("1").setCallbackData("2"));
+                row.add(new InlineKeyboardButton().setText("3").setCallbackData("4"));
+                List<InlineKeyboardButton> row2 = new ArrayList();
+                row2.add(new InlineKeyboardButton().setText("3").setCallbackData("2rowbuttonPressed"));
+                row2.add(new InlineKeyboardButton().setText("4").setCallbackData("2rowbutton2pressed"));
+                List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+                keyboard.add(row);
+                keyboard.add(row2);
+                InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup().setKeyboard(keyboard);
+                emt.setReplyMarkup(inlineKeyboardMarkup);
+                sendMsg(emt);
+            }
+        }

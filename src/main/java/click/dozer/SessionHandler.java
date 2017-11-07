@@ -1,11 +1,16 @@
 package click.dozer;
 
+import org.telegram.telegrambots.api.objects.Update;
+
+import java.util.HashMap;
+
 /**
  * Created by alexd on 25.10.2017.
  */
 public class SessionHandler {
+    HashMap<Integer, Integer> session = new HashMap<>();
 
-    public int getSessionID(Integer userID) {
+    public int getSessionID(Update update) {
         return 0;
     }
 }

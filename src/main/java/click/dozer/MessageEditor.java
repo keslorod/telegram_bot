@@ -30,16 +30,13 @@ public class MessageEditor {
             SendMessage message = new SendMessage();
             messageText = "I'm Behter";
             message.setChatId(msg.getChatId()).setText(messageText);
-            KeyboardButton yes = new KeyboardButton("Yes");
-            KeyboardButton no = new KeyboardButton("No");
             KeyboardRow kr = new KeyboardRow();
-            kr.add(yes);
-            kr.add(no);
-            List<KeyboardRow> keyboardRows = new ArrayList<>();
-            keyboardRows.add(kr);
-            ReplyKeyboard rp;
-
-//            message.setReplyMarkup(rp);
+            kr.add(new KeyboardButton("Yes"));
+            kr.add(new KeyboardButton("No"));
+            List<KeyboardRow> krs = new ArrayList<>();
+            krs.add(kr);
+            ReplyKeyboard rp = new ReplyKeyboardMarkup().setKeyboard(krs);
+            message.setReplyMarkup(rp);
 
             try {
                 bot.execute(message);
@@ -54,9 +51,7 @@ public class MessageEditor {
             }
 
         }
-
     }
-
 
     public ArrayList<SendMessage> getDispatch() {
         return null;

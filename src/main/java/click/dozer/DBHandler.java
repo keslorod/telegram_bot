@@ -31,6 +31,4 @@ public class DBHandler {
     private HashMap<Integer, Event> getAllEvents() {
         return null;
     }
-
-
 }
